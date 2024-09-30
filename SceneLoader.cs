@@ -16,7 +16,7 @@ class SceneLoader
     {
         if (nextScene == "") return;
         scene.Clear();
-        //TODO: Load scene file
+        // TODO: Load scene file
         currentScene = nextScene;
         nextScene = "";
     }

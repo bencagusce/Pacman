@@ -1,5 +1,9 @@
-namespace Pacman;
+using SFML.Graphics;
+using SFML.System;
+using SFML.Window;
+using System;
 
+namespace Pacman;
 class Entity
 {
     private string textureName;
@@ -21,7 +25,7 @@ class Entity
     {
         sprite.Texture = scene.LoadTexture(textureName);
     }
-    public virtual void Desrtoy(Scene scene)
+    public virtual void Destroy(Scene scene)
     {
         
     }
