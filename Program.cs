@@ -41,6 +41,7 @@ class Program
                 }
             };
             
+            
             while (window.IsOpen) 
             {
                 window.DispatchEvents();

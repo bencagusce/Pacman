@@ -11,6 +11,8 @@ public class Scene
     public readonly bool[,] walls;
     public readonly SceneLoader Loader = new SceneLoader();
     public readonly AssetManager Assets = new AssetManager();
+    private const float GRACELENGTH = 3f;
+    private float grace = GRACELENGTH;
 
     public Scene()
     {
@@ -38,6 +40,13 @@ public class Scene
     public void UpdateAll(float deltaTime)
     {
         Loader.HandleSceneLoad(this);
+
+        if (grace > 0)
+        {
+            grace -= deltaTime;
+            return;
+        }
+        
         for (int i = entities.Count - 1; i >= 0; i--)
         {
             Entity entity = entities[i];

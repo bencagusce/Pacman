@@ -40,73 +40,120 @@ public sealed class Pacman : Actor
         animationFrame = 1;
         sprite.TextureRect = new IntRect(0, 0, 18, 18);
         sprite.Origin = new Vector2f(9, 9);
+        direction = Direction.RIGHT;
     }
 
-    public void Update(Scene scene, float deltaTime)
+    public override void Update(Scene scene, float deltaTime)
     {
         SpriteChange(deltaTime);
-        //check direction and set enum direction
-        //check for corner turn.
         
         Vector2f oldPosition = Position - sprite.Origin;
 
-        Position += (walkSpeed * deltaTime * direction switch
-        {
-            Direction.UP => new Vector2f(0, -1),
-            Direction.DOWN => new Vector2f(0,1),
-            Direction.LEFT => new Vector2f(-1,0),
-            _ => new Vector2f(1,0)
-        });
+        Position += walkSpeed * deltaTime * directionVectors[(int)direction];
 
         Vector2f newPosition = Position - sprite.Origin;
+
+        Vector2i intPosition = RoundToGrid(newPosition);
         
-        Vector2i intPosition = new Vector2i((int)MathF.Round(newPosition.X / 18),
-            (int)MathF.Round(newPosition.Y / 18));
+        Vector2i frontPosition = RoundToGrid(newPosition + RADIUS * directionVectors[(int)direction]);
+
+        bool hitAWall = false;
+        if (scene.walls[frontPosition.X, frontPosition.Y])
+        {
+            Position = sprite.Origin + (Vector2f)(18 * intPosition);
+            hitAWall = true;
+        }
         
         switch (direction)
         {
             case Direction.RIGHT:
             {
-                if (newPosition.X % 18 < oldPosition.X % 18)
+                if (newPosition.X % 18 < oldPosition.X % 18 || hitAWall)
                 {
                     if (Program.Direction == Direction.UP &&
                         !scene.walls[intPosition.X, intPosition.Y - 1])
                     {
                         direction = Direction.UP;
-                        sprite.Position = sprite.Origin + (Vector2f)(18 * intPosition);
+                        Position = sprite.Origin + (Vector2f)(18 * intPosition);
                     }
                     
                     if (Program.Direction == Direction.DOWN &&
                         !scene.walls[intPosition.X, intPosition.Y + 1])
                     {
                         direction = Direction.DOWN;
-                        sprite.Position = sprite.Origin + (Vector2f)(18 * intPosition);
+                        Position = sprite.Origin + (Vector2f)(18 * intPosition);
+                    }
+                }
+                break;
+            }
+            case Direction.LEFT:
+            {
+                if (-newPosition.X % 18 > -oldPosition.X % 18 || hitAWall)
+                {
+                    if (Program.Direction == Direction.UP &&
+                        !scene.walls[intPosition.X, intPosition.Y - 1])
+                    {
+                        direction = Direction.UP;
+                        Position = sprite.Origin + (Vector2f)(18 * intPosition);
+                    }
+                    
+                    if (Program.Direction == Direction.DOWN &&
+                        !scene.walls[intPosition.X, intPosition.Y + 1])
+                    {
+                        direction = Direction.DOWN;
+                        Position = sprite.Origin + (Vector2f)(18 * intPosition);
                     }
                 }
                 break;
             }
             case Direction.DOWN:
             {
-                if (newPosition.Y % 18 < oldPosition.Y % 18)
+                if (newPosition.Y % 18 < oldPosition.Y % 18 || hitAWall)
                 {
                     if (Program.Direction == Direction.LEFT &&
                         !scene.walls[intPosition.X -1, intPosition.Y])
                     {
                         direction = Direction.LEFT;
-                        sprite.Position = sprite.Origin + (Vector2f)(18 * intPosition);
+                        Position = sprite.Origin + (Vector2f)(18 * intPosition);
                     }
                     
                     if (Program.Direction == Direction.RIGHT &&
                         !scene.walls[intPosition.X + 1, intPosition.Y])
                     {
                         direction = Direction.RIGHT;
-                        sprite.Position = sprite.Origin + (Vector2f)(18 * intPosition);
+                        Position = sprite.Origin + (Vector2f)(18 * intPosition);
+                    }
+                }
+                break;
+            }
+            case Direction.UP:
+            {
+                if (-newPosition.Y % 18 > -oldPosition.Y % 18 || hitAWall)
+                {
+                    if (Program.Direction == Direction.LEFT &&
+                        !scene.walls[intPosition.X -1, intPosition.Y])
+                    {
+                        direction = Direction.LEFT;
+                        Position = sprite.Origin + (Vector2f)(18 * intPosition);
+                    }
+                    
+                    if (Program.Direction == Direction.RIGHT &&
+                        !scene.walls[intPosition.X + 1, intPosition.Y])
+                    {
+                        direction = Direction.RIGHT;
+                        Position = sprite.Origin + (Vector2f)(18 * intPosition);
                     }
                 }
                 break;
             }
         }
     }
+
+    public Vector2i RoundToGrid(Vector2f v)
+    {
+        return new Vector2i((int)MathF.Round(v.X / 18), (int)MathF.Round(v.Y / 18));                                       
+    }
+    
     //0,1,2,-1
     public void SpriteChange(float deltaTime)
     {
@@ -120,7 +167,7 @@ public sealed class Pacman : Actor
                 countDown = true;
                 animationFrame++;
             }
-            animationFrame = animationFrame % 3;
+            animationFrame %= 3;
             
             switch (direction)
             {
@@ -128,28 +175,44 @@ public sealed class Pacman : Actor
                 {
                     animationBuffer = 0;
                     sprite.TextureRect = new IntRect(spritesUp[animationFrame], new Vector2i(18, 18));
-                    if (countDown) animationFrame = -1;
+                    if (countDown)
+                    {
+                        animationFrame = -1;
+                        countDown = false;
+                    }
                     break;
                 }
                 case Direction.DOWN:
                 {
                     animationBuffer = 0;
                     sprite.TextureRect = new IntRect(spritesDown[animationFrame], new Vector2i(18, 18));
-                    if (countDown) animationFrame = -1;
+                    if (countDown)
+                    {
+                        animationFrame = -1;
+                        countDown = false;
+                    }
                     break;
                 }
                 case Direction.RIGHT:
                 {
                     animationBuffer = 0;
                     sprite.TextureRect = new IntRect(spritesRight[animationFrame], new Vector2i(18, 18));
-                    if (countDown) animationFrame = -1;
+                    if (countDown)
+                    {
+                        animationFrame = -1;
+                        countDown = false;
+                    }
                     break;
                 }
                 case Direction.LEFT:
                 {
                     animationBuffer = 0;
                     sprite.TextureRect = new IntRect(spritesLeft[animationFrame], new Vector2i(18, 18));
-                    if (countDown) animationFrame = -1;
+                    if (countDown)
+                    {
+                        animationFrame = -1;
+                        countDown = false;
+                    }
                     break;
                 }
             }
