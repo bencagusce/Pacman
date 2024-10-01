@@ -1,4 +1,5 @@
 using System.Text;
+using SFML.System;
 
 namespace Pacman;
 
@@ -34,7 +35,8 @@ public class SceneLoader
                 Entity entity;
                 if (Create(line[x], out entity))
                 {
-                    entity.Create(scene);
+                    entity.Position = new Vector2f(  x * 18 + 9, y * 18 + 9);
+                    scene.Spawn(entity);
                 }
             }
         }
