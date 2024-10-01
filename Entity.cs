@@ -17,11 +17,11 @@ public class Entity
         get => sprite.Position;
         set => sprite.Position = value;
     }
-    public readonly FloatRect Bounds => sprite.GetGlobalBounds();
-    public virtual readonly bool Solid => false;
+    public FloatRect Bounds => sprite.GetGlobalBounds();
+    public virtual bool Solid => false;
     public virtual void Create(Scene scene)
     {
-        // sprite.Texture = scene.LoadTexture(textureName);
+        sprite.Texture = scene.Assets.LoadTexture(textureName);
     }
     public virtual void Destroy(Scene scene)
     {
