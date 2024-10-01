@@ -42,11 +42,70 @@ public sealed class Pacman : Actor
         sprite.Origin = new Vector2f(9, 9);
     }
 
-    public void Update(float deltaTime)
+    public void Update(Scene scene, float deltaTime)
     {
         SpriteChange(deltaTime);
         //check direction and set enum direction
         //check for corner turn.
+        
+        Vector2f oldPosition = Position - sprite.Origin;
+
+        Position += (walkSpeed * deltaTime * direction switch
+        {
+            Direction.UP => new Vector2f(0, -1),
+            Direction.DOWN => new Vector2f(0,1),
+            Direction.LEFT => new Vector2f(-1,0),
+            _ => new Vector2f(1,0)
+        });
+
+        Vector2f newPosition = Position - sprite.Origin;
+        
+        Vector2i intPosition = new Vector2i((int)MathF.Round(newPosition.X / 18),
+            (int)MathF.Round(newPosition.Y / 18));
+        
+        switch (direction)
+        {
+            case Direction.RIGHT:
+            {
+                if (newPosition.X % 18 < oldPosition.X % 18)
+                {
+                    if (Program.Direction == Direction.UP &&
+                        !scene.walls[intPosition.X, intPosition.Y - 1])
+                    {
+                        direction = Direction.UP;
+                        sprite.Position = sprite.Origin + (Vector2f)(18 * intPosition);
+                    }
+                    
+                    if (Program.Direction == Direction.DOWN &&
+                        !scene.walls[intPosition.X, intPosition.Y + 1])
+                    {
+                        direction = Direction.DOWN;
+                        sprite.Position = sprite.Origin + (Vector2f)(18 * intPosition);
+                    }
+                }
+                break;
+            }
+            case Direction.DOWN:
+            {
+                if (newPosition.Y % 18 < oldPosition.Y % 18)
+                {
+                    if (Program.Direction == Direction.LEFT &&
+                        !scene.walls[intPosition.X -1, intPosition.Y])
+                    {
+                        direction = Direction.LEFT;
+                        sprite.Position = sprite.Origin + (Vector2f)(18 * intPosition);
+                    }
+                    
+                    if (Program.Direction == Direction.RIGHT &&
+                        !scene.walls[intPosition.X + 1, intPosition.Y])
+                    {
+                        direction = Direction.RIGHT;
+                        sprite.Position = sprite.Origin + (Vector2f)(18 * intPosition);
+                    }
+                }
+                break;
+            }
+        }
     }
     //0,1,2,-1
     public void SpriteChange(float deltaTime)
