@@ -17,7 +17,7 @@ public class Entity
         get => sprite.Position;
         set => sprite.Position = value;
     }
-    public FloatRect Bounds => sprite.GetGlobalBounds();
+    public virtual FloatRect Bounds => sprite.GetGlobalBounds();
     public virtual bool Solid => false;
     public virtual void Create(Scene scene)
     {

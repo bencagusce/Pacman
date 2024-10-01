@@ -38,7 +38,7 @@ public sealed class Pacman : Actor
     public Pacman() : base()
     {
         walkSpeed = 10.0f;
-        keyFrameThreshold = 0.2f;
+        keyFrameThreshold = 0.08f;
         animationFrame = 1;
         sprite.TextureRect = new IntRect(0, 0, 18, 18);
         sprite.Origin = new Vector2f(9, 9);

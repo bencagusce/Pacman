@@ -31,5 +31,5 @@
 - [ ] When ghosts and player is reset to start position, make them invulnerable and unable to move for a set amount of time.
 - [ ] Add a highscore that is shown when the game is lost (health = 0) and is saved between sessions (written to a file).
 
-## test animation time
-- [ ] for pacman
+## fix for next time
+- [ ] hearts to show on screen
