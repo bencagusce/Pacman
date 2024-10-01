@@ -27,7 +27,6 @@ public class Scene
     }
     public void UpdateAll(float deltaTime)
     {
-        HandleSceneChange();
         for (int i = entities.Count - 1; i >= 0; i--)
         {
             Entity entity = entities[i];
@@ -48,7 +47,7 @@ public class Scene
             entity.Render(target);
         }
     }
-     public bool FindByType<T>(out T found) where T : Entity
+    public bool FindByType<T>(out T found) where T : Entity
     {
         foreach (var entity in entities)
         {
@@ -58,6 +57,9 @@ public class Scene
                 return true;
             }
         }
+
+        found = default;
+        return false;
     }
     public IEnumerable<Entity> FindIntersects(FloatRect bounds) 
     {

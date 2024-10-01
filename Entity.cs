@@ -19,7 +19,7 @@ public class Entity
     }
     public readonly FloatRect Bounds => sprite.GetGlobalBounds();
     public virtual readonly bool Solid => false;
-     public virtual void Create(Scene scene)
+    public virtual void Create(Scene scene)
     {
         // sprite.Texture = scene.LoadTexture(textureName);
     }
@@ -31,7 +31,7 @@ public class Entity
     {
         foreach (Entity found in scene.FindIntersects(Bounds)) CollideWith(scene, found);
     }
-    protected virtual void CollideWith(scene s, Entity other)
+    protected virtual void CollideWith(Scene s, Entity other)
     {
         // Empty ->Overriden by implementing classes
     }
