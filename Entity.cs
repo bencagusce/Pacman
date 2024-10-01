@@ -21,7 +21,7 @@ public class Entity
     public virtual readonly bool Solid => false;
      public virtual void Create(Scene scene)
     {
-        sprite.Texture = scene.LoadTexture(textureName);
+        // sprite.Texture = scene.LoadTexture(textureName);
     }
     public virtual void Destroy(Scene scene)
     {

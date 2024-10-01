@@ -9,12 +9,8 @@ public class Scene
 {
     //idk what i've written 7
     private List<Entity> entities;
-    //public readonly SceneLoader.loader //idk if this is correct 7
-    // public Texture LoadTexture(string a)
-    // {
-    //    return AssetManager.LoadTexture(a);
-    // }
-    
+    public readonly SceneLoader Loader;
+    public readonly AssetManager Assets; 
     public void Spawn(Entity entity)
     {
         entities.Add(entity);
