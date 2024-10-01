@@ -11,11 +11,11 @@ public class SceneLoader
         loaders = new Dictionary<char, Func<Entity>>
         {
             { '#', () => new Wall() },
-            // { '|', () => new }
             { '.', () => new Coin() },
             { 'g', () => new Ghost() },
             { 'c', () => new Candy()},
             { 'p', () => new Pacman()}
+            // { '|', () => new }
         };
     }
     public void HandleSceneLoad(Scene scene)

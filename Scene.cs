@@ -7,7 +7,6 @@ namespace Pacman;
 
 public class Scene
 {
-    //idk what i've written 7
     private List<Entity> entities;
     public readonly SceneLoader Loader;
     public readonly AssetManager Assets; 
@@ -20,7 +19,7 @@ public class Scene
     {
         for (int i = entities.Count - 1; i >= 0; i--)
         {
-            Entity entity = entities[i]; //something is wrong with the color of Entity 10
+            Entity entity = entities[i];
             entities.RemoveAt(i);
             entity.Destroy(this);
         }
