@@ -25,8 +25,8 @@ public sealed class Coin : Entity
         }
     }
 
-    public bool touching(Pacman pacman)
-    {
-        
-    }
+    //public bool touching(Pacman pacman)
+    //{
+    //    
+    //}
 }

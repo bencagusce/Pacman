@@ -5,19 +5,20 @@ namespace Pacman;
 
 public sealed class GUI : Entity
 {
-    private Text scoreText;
+    Text scoreText = new Text();
     private int maxHealth = 3;
     private int currentHealth;
-    private int currentScore;
+    private int currentScore = 0;
     public GUI() : base("pacman")
     {
         sprite.TextureRect = new IntRect(72, 36, 18, 18);
         sprite.Origin = new Vector2f(9, 9);
     }
 
-    public override void Create(Scene scene, float deltaTime)
+    public override void Create(Scene scene)
     {
-        scoreText.Font = scene.Assets.LoadFont("pixel-font");
+        Font font = scene.Assets.LoadFont("pixel-font");
+        scoreText.Font = font;
         scoreText.DisplayedString = "Score";
         currentHealth = maxHealth;
     }

@@ -19,7 +19,7 @@ public class Entity
     }
     public virtual FloatRect Bounds => sprite.GetGlobalBounds();
     public virtual bool Solid => false;
-    public virtual void Create(Scene scene, float deltaTime)
+    public virtual void Create(Scene scene)
     {
         sprite.Texture = scene.Assets.LoadTexture(textureName);
     }
