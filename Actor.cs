@@ -1,6 +1,21 @@
 namespace Pacman;
 
-public class Actor
+public enum Direction
 {
-    
+    UP,
+    DOWN,
+    RIGHT,
+    LEFT
+}
+public class Actor : Entity
+{
+    protected float walkSpeed;
+    protected float animationBuffer = 0;
+    protected float keyFrameThreshold;
+    protected bool keyframe = false;
+    protected Direction direction;
+    public Actor(): base ("pacman")
+    {
+        
+    }
 }
