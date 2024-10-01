@@ -42,17 +42,17 @@ public sealed class Pacman : Actor
         sprite.Origin = new Vector2f(9, 9);
     }
 
-    public void Update()
+    public void Update(float deltaTime)
     {
+        SpriteChange(deltaTime);
         //check direction and set enum direction
-        //check for corner turns
-        //update sprite
+        //check for corner turn.
     }
     //0,1,2,-1
-    public void SpriteChange(float deltatime)
+    public void SpriteChange(float deltaTime)
     {
         //change sprite based on an animationbuffer
-        animationBuffer += deltatime;
+        animationBuffer += deltaTime;
         if ((animationBuffer > keyFrameThreshold))
         {
             animationFrame++;
