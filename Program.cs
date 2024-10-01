@@ -15,14 +15,23 @@ class Program
             window.Closed += (o, e) => window.Close();
             // Initialize
             Clock clock = new Clock();
+
+            Scene scene = new Scene();
+            scene.Loader.Load("maze");
+            
             while (window.IsOpen) 
             {
                 window.DispatchEvents();
                 float deltaTime = clock.Restart().AsSeconds();
                 deltaTime = MathF.Min(deltaTime, 0.01f);
+                
                 // Updates
-                window.Clear(new Color(223, 246, 245));
+                scene.UpdateAll(deltaTime);
+                
                 // Drawing
+                window.Clear(new Color(223, 246, 245));
+                scene.RenderAll(window);
+                
                 window.Display();
             }
         }

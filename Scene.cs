@@ -9,8 +9,13 @@ public class Scene
 {
     //idk what i've written 7
     private List<Entity> entities;
-    public readonly SceneLoader Loader;
-    public readonly AssetManager Assets; 
+    public readonly SceneLoader Loader = new SceneLoader();
+    public readonly AssetManager Assets = new AssetManager();
+
+    public Scene()
+    {
+        entities = new List<Entity>();
+    }
     public void Spawn(Entity entity)
     {
         entities.Add(entity);
@@ -27,6 +32,7 @@ public class Scene
     }
     public void UpdateAll(float deltaTime)
     {
+        Loader.HandleSceneLoad(this);
         for (int i = entities.Count - 1; i >= 0; i--)
         {
             Entity entity = entities[i];
@@ -40,7 +46,7 @@ public class Scene
             else i++;
         }
     } 
-        public void RenderAll(RenderTarget target)
+    public void RenderAll(RenderTarget target)
     {
         foreach (var entity in entities)
         {
