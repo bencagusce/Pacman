@@ -33,14 +33,21 @@ public sealed class Pacman : Actor
         new(0, 36),
         new(36, 54)
     };
+
+    private RectangleShape debugBox;
     public Pacman() : base()
     {
-        walkSpeed = 100.0f;
+        walkSpeed = 10.0f;
         keyFrameThreshold = 0.2f;
         animationFrame = 1;
         sprite.TextureRect = new IntRect(0, 0, 18, 18);
         sprite.Origin = new Vector2f(9, 9);
         direction = Direction.RIGHT;
+        debugBox = new RectangleShape();
+        debugBox.Size = new Vector2f(18, 18);
+        debugBox.Origin = new Vector2f(9, 9);
+        debugBox.OutlineColor = Color.Red;
+        debugBox.OutlineThickness = 2;
     }
 
     public override void Update(Scene scene, float deltaTime)
@@ -54,6 +61,7 @@ public sealed class Pacman : Actor
         Vector2f newPosition = Position - sprite.Origin;
 
         Vector2i intPosition = RoundToGrid(newPosition);
+        debugBox.Position = sprite.Origin + (Vector2f)(18 * intPosition);
         
         Vector2i frontPosition = RoundToGrid(newPosition + RADIUS * directionVectors[(int)direction]);
 
@@ -147,6 +155,12 @@ public sealed class Pacman : Actor
                 break;
             }
         }
+    }
+    
+    public override void Render(RenderTarget target)
+    {
+        target.Draw(debugBox);
+        target.Draw(sprite);
     }
 
     public Vector2i RoundToGrid(Vector2f v)
