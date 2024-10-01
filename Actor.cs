@@ -9,6 +9,7 @@ public enum Direction
 }
 public class Actor : Entity
 {
+    protected int animationFrame;
     protected float walkSpeed;
     protected float animationBuffer = 0;
     protected float keyFrameThreshold;

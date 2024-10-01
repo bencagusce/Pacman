@@ -1,5 +1,5 @@
 # The game needs to contain:
-## Check for errors and mistakes and continue at 14 in tutorial.
+## 
 - [ ] Player character.
     - [ ] Can be moved by player.
     - [ ] Left, Right, Up and Down.
@@ -30,3 +30,6 @@
 - [ ] Animate the ghosts, and have pacman face in the movement direction.
 - [ ] When ghosts and player is reset to start position, make them invulnerable and unable to move for a set amount of time.
 - [ ] Add a highscore that is shown when the game is lost (health = 0) and is saved between sessions (written to a file).
+
+## test animation time
+- [ ] for pacman
