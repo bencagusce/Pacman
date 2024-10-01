@@ -23,7 +23,6 @@ public class AssetManager
     }
     public Font LoadFont(string name)
     {
-        //ska inte stå massa "texture" utan "font" 5
         if (fonts.TryGetValue(name, out Font found)) return found;
         string fileName = $"assets/{name}.ttf";
         Font font = new Font(fileName);

@@ -17,9 +17,9 @@ public class Entity
         get => sprite.Position;
         set => sprite.Position = value;
     }
-    public FloatRect Bounds => sprite.GetGlobalBounds();
+    public virtual FloatRect Bounds => sprite.GetGlobalBounds();
     public virtual bool Solid => false;
-    public virtual void Create(Scene scene)
+    public virtual void Create(Scene scene, float deltaTime)
     {
         sprite.Texture = scene.Assets.LoadTexture(textureName);
     }
@@ -35,7 +35,7 @@ public class Entity
     {
         // Empty ->Overriden by implementing classes
     }
-    public void Render(RenderTarget target)
+    public virtual void Render(RenderTarget target)
     {
         target.Draw(sprite);
     }
