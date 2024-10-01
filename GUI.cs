@@ -1,3 +1,9 @@
 namespace Pacman;
 
-class
+public sealed class GUI : Entity
+{
+    public GUI() : base("pacman")
+    {
+        
+    }
+}

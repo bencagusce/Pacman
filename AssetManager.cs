@@ -1,8 +1,9 @@
 using SFML.Graphics;
 using System.Collections.Generic;
+
 namespace Pacman;
 
-class AssetManager
+public class AssetManager
 {
     public static readonly string AssetPath = "assets";
     private readonly Dictionary<string, Texture> textures;
@@ -23,10 +24,10 @@ class AssetManager
     public Font LoadFont(string name)
     {
         //ska inte stå massa "texture" utan "font" 5
-        if (textures.TryGetValue(name, out Texture found)) return found;
+        if (fonts.TryGetValue(name, out Font found)) return found;
         string fileName = $"assets/{name}.ttf";
-        Texture texture = new Texture(fileName);
-        textures.Add(name, texture);
-        return texture;
+        Font font = new Font(fileName);
+        fonts.Add(name, font);
+        return font;
     }
 }

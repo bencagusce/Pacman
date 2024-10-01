@@ -5,12 +5,16 @@ using System;
 
 namespace Pacman;
 
-class Scene
+public class Scene
 {
     //idk what i've written 7
     private List<Entity> entities;
-    public readonly SceneLoader.loader //idk if this is correct 7
-    public readonly AssetManager.assets // --::--
+    //public readonly SceneLoader.loader //idk if this is correct 7
+    // public Texture LoadTexture(string a)
+    // {
+    //    return AssetManager.LoadTexture(a);
+    // }
+    
     public void Spawn(Entity entity)
     {
         entities.Add(entity);
@@ -22,7 +26,7 @@ class Scene
         {
             Entity entity = entities[i]; //something is wrong with the color of Entity 10
             entities.RemoveAt(i);
-            entity.Desrtoy(this);
+            entity.Destroy(this);
         }
     }
     public void UpdateAll(float deltaTime)

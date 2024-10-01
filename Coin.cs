@@ -1,3 +1,9 @@
 namespace Pacman;
 
-class
+public sealed class Coin : Entity
+{
+    public Coin() : base ("pacman")
+    {
+        
+    }
+}

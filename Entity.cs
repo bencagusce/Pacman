@@ -1,13 +1,11 @@
 using SFML.Graphics;
 using SFML.System;
-using SFML.Window;
-using System;
 
 namespace Pacman;
-class Entity
+public class Entity
 {
     private string textureName;
-    protected Sprite sprite = new sprite();
+    protected Sprite sprite = new Sprite();
     public bool Dead;
     protected Entity(string textureName)
     {

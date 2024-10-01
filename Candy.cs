@@ -1,3 +1,9 @@
 namespace Pacman;
 
-class
+public sealed class Candy : Entity
+{
+    public Candy() : base("pacman")
+    {
+        
+    }
+}

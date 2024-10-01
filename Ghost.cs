@@ -1,3 +1,9 @@
 namespace Pacman;
 
-class
+public sealed class Ghost : Entity
+{
+    public Ghost() : base("pacman")
+    {
+        
+    }
+}

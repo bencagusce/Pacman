@@ -1,3 +1,6 @@
 namespace Pacman;
 
-class
+public class Actor
+{
+    
+}

@@ -1,22 +1,42 @@
+using System.Text;
+
 namespace Pacman;
 
-class SceneLoader
+public class SceneLoader
 {
     private readonly Dictionary<char, Func<Entity>> loaders;
     private string currentScene = "", nextScene = "";
     public SceneLoader()
     {
-        loaders = new Dictionary<char, Func<Entity>> 
+        loaders = new Dictionary<char, Func<Entity>>
         {
-            {'#', () => new Wall()}
-        }
-        // Initialize dictionaty 6
+            { '#', () => new Wall() },
+            // { '|', () => new }
+            { '.', () => new Coin() },
+            { 'g', () => new Ghost() },
+            { 'c', () => new Candy()},
+            { 'p', () => new Pacman()}
+        };
     }
     public void HandleSceneLoad(Scene scene)
     {
         if (nextScene == "") return;
         scene.Clear();
-        // TODO: Load scene file
+
+        string file = "maze.txt";
+        List<string> lines = File.ReadLines(file, Encoding.UTF8).ToList();
+        
+        for (int y = 0; y < lines.Count(); y++)
+        {
+            string line = lines[y];
+            for (int x = 0; x < line.Length; x++)
+            {
+                Entity entity;
+                Create(line[x], out entity);
+                
+            }
+        }
+        
         currentScene = nextScene;
         nextScene = "";
     }
