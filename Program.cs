@@ -31,7 +31,7 @@ class Program
                 scene.UpdateAll(deltaTime);
                 
                 // Drawing
-                window.Clear(new Color(223, 246, 245));
+                window.Clear(Color.Black);
                 scene.RenderAll(window);
                 
                 window.Display();
