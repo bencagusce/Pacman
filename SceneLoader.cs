@@ -23,7 +23,7 @@ public class SceneLoader
         if (nextScene == "") return;
         scene.Clear();
 
-        string file = "maze.txt";
+        string file = $"assets/{nextScene}.txt";
         List<string> lines = File.ReadLines(file, Encoding.UTF8).ToList();
         
         for (int y = 0; y < lines.Count(); y++)
@@ -32,8 +32,10 @@ public class SceneLoader
             for (int x = 0; x < line.Length; x++)
             {
                 Entity entity;
-                Create(line[x], out entity);
-                
+                if (Create(line[x], out entity))
+                {
+                    entity.Create(scene);
+                }
             }
         }
         
@@ -50,4 +52,8 @@ public class SceneLoader
         created = null;
         return false;
     }
+
+    public void Load(string scene) => nextScene = scene;
+
+    public void Reload() => nextScene = currentScene;
 }
