@@ -8,17 +8,25 @@ namespace Pacman;
 public class Scene
 {
     private List<Entity> entities;
+    public readonly bool[,] walls;
     public readonly SceneLoader Loader = new SceneLoader();
     public readonly AssetManager Assets = new AssetManager();
+    private const float GRACELENGTH = 3f;
+    private float grace = GRACELENGTH;
 
     public Scene()
     {
         entities = new List<Entity>();
+        walls = new bool[25,21];
     }
     public void Spawn(Entity entity)
     {
         entities.Add(entity);
         entity.Create(this);
+    }
+    public void SpawnWall(int x, int y)
+    {
+        walls[x, y] = true;
     }
     public void Clear()
     {
@@ -32,6 +40,13 @@ public class Scene
     public void UpdateAll(float deltaTime)
     {
         Loader.HandleSceneLoad(this);
+
+        if (grace > 0)
+        {
+            grace -= deltaTime;
+            return;
+        }
+        
         for (int i = entities.Count - 1; i >= 0; i--)
         {
             Entity entity = entities[i];

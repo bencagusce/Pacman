@@ -7,6 +7,7 @@ namespace Pacman;
 
 class Program 
 {
+    public static Direction Direction { get; private set; }
     static void Main(string[] args) 
     {
         using (var window = new RenderWindow(
@@ -20,6 +21,26 @@ class Program
             scene.Loader.Load("maze");
             
             window.SetView(new View(new FloatRect(18, 0, 414, 450)));
+            
+            window.KeyPressed += (s, e) =>
+            {
+                switch (e.Code)
+                {
+                    case Keyboard.Key.Up:
+                        Direction = Direction.UP;
+                        break;
+                    case Keyboard.Key.Down:
+                        Direction = Direction.DOWN;
+                        break;
+                    case Keyboard.Key.Right:
+                        Direction = Direction.RIGHT;
+                        break;
+                    case Keyboard.Key.Left:
+                        Direction = Direction.LEFT;
+                        break;
+                }
+            };
+            
             
             while (window.IsOpen) 
             {
