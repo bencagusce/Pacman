@@ -67,7 +67,7 @@ public sealed class Scene
         if (healthLost != 0)
         {
             LoseHealth?.Invoke(this, healthLost);
-            healthLost = 0
+            healthLost = 0;
         }
         
         for (int i = 0; i < entities.Count;)
