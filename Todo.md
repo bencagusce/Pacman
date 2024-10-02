@@ -27,7 +27,7 @@
     - [x] Is loaded from a text-file.
 - [x] All of the above game elements has a functional graphical representation.
 ## At least one of the Bonus Features:
-- [ ] Animate the ghosts, and have pacman face in the movement direction.
+- [x] Animate the ghosts, and have pacman face in the movement direction.
 - [x] When ghosts and player is reset to start position, make them invulnerable and unable to move for a set amount of time.
 - [ ] Add a highscore that is shown when the game is lost (health = 0) and is saved between sessions (written to a file).
 

@@ -6,7 +6,7 @@ namespace Pacman;
 public sealed class Ghost : Actor
 {
     private bool isBlue;
-    private bool firstSprite;
+    private bool firstSprite = true;
     private Vector2i spritePosition = new Vector2i(36, 0);
     private static Random rng = new Random();
     private List<CircleShape> debug;
@@ -30,7 +30,7 @@ public sealed class Ghost : Actor
     {
         // spritePosition = isBlue ? new Vector2i(spritePosition.X, 18) : new Vector2i(spritePosition.X, 0);
         // sprite.TextureRect = new IntRect(spritePosition, new Vector2i(18, 18));
-        // SpriteChange(deltaTime);
+        SpriteChange(deltaTime);
         
         // MOVEMENT
         // Position before movement
@@ -104,6 +104,7 @@ public sealed class Ghost : Actor
             animationBuffer = 0;  
             spritePosition += firstSprite ? new Vector2i(18, 0) : new Vector2i(-18, 0);
             sprite.TextureRect = new IntRect(spritePosition, new Vector2i(18, 18));
+            firstSprite = !firstSprite;
         }
     }
 
