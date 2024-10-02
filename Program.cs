@@ -38,6 +38,9 @@ class Program
                     case Keyboard.Key.Left:
                         Direction = Direction.LEFT;
                         break;
+                    case Keyboard.Key.Space:
+                        GUI.gameOver = false;
+                        break;
                 }
             };
             

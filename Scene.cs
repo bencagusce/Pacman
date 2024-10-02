@@ -48,6 +48,7 @@ public sealed class Scene
     }
     public void UpdateAll(float deltaTime)
     {
+        if (GUI.gameOver) return;
         Loader.HandleSceneLoad(this);
 
         if (grace > 0)

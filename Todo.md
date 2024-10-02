@@ -29,4 +29,10 @@
 ## At least one of the Bonus Features:
 - [x] Animate the ghosts, and have pacman face in the movement direction.
 - [x] When ghosts and player is reset to start position, make them invulnerable and unable to move for a set amount of time.
-- [ ] Add a highscore that is shown when the game is lost (health = 0) and is saved between sessions (written to a file).
+- [x] Add a highscore that is shown when the game is lost (health = 0) and is saved between sessions (written to a file).
+
+## FIX IF TIME
+- [ ] Pacman 180s
+- [ ] Ghosts 180n't
+- [ ] Pathfinding ghosts
+- [ ] Connected textures
