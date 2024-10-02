@@ -34,7 +34,7 @@ public sealed class Pacman : Actor
         new(36, 54)
     };
 
-    public Pacman() : base()
+    public Pacman()
     {
         walkSpeed = 100.0f;
         keyFrameThreshold = 0.08f;
@@ -42,16 +42,7 @@ public sealed class Pacman : Actor
         sprite.TextureRect = new IntRect(0, 0, 18, 18);
         sprite.Origin = new Vector2f(9, 9);
         direction = Direction.RIGHT;
-    }
-
-    public override void Create(Scene scene)
-    {
-        base.Create(scene);
-        scene.LoseHealth += OnLoseHealth;
-    }
-
-    private void OnLoseHealth(Scene scene, int amount) => Reset();
-    protected override void Reset()
+    } protected override void Reset()
     {
         direction = Direction.RIGHT;
         animationFrame = 1;
