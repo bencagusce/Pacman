@@ -118,7 +118,7 @@ public sealed class Scene
         {
             Entity entity = entities[i];
             if (entity.Dead) continue;
-            if (entity.Bounds.Intersects(bounds)) yield return entity;
+            if (bounds.Contains(entity.Position.X, entity.Position.Y)) yield return entity;
         }
     }
 }   
