@@ -34,20 +34,14 @@ public sealed class Pacman : Actor
         new(36, 54)
     };
 
-    private RectangleShape debugBox;
     public Pacman() : base()
     {
-        walkSpeed = 10.0f;
+        walkSpeed = 100.0f;
         keyFrameThreshold = 0.08f;
         animationFrame = 1;
         sprite.TextureRect = new IntRect(0, 0, 18, 18);
         sprite.Origin = new Vector2f(9, 9);
         direction = Direction.RIGHT;
-        debugBox = new RectangleShape();
-        debugBox.Size = new Vector2f(18, 18);
-        debugBox.Origin = new Vector2f(9, 9);
-        debugBox.OutlineColor = Color.Red;
-        debugBox.OutlineThickness = 2;
     }
 
     public override void Update(Scene scene, float deltaTime)
@@ -61,7 +55,6 @@ public sealed class Pacman : Actor
         Vector2f newPosition = Position - sprite.Origin;
 
         Vector2i intPosition = RoundToGrid(newPosition);
-        debugBox.Position = sprite.Origin + (Vector2f)(18 * intPosition);
         
         Vector2i frontPosition = RoundToGrid(newPosition + RADIUS * directionVectors[(int)direction]);
 
@@ -96,7 +89,7 @@ public sealed class Pacman : Actor
             }
             case Direction.LEFT:
             {
-                if (-newPosition.X % 18 > -oldPosition.X % 18 || hitAWall)
+                if (-newPosition.X % 18 < -oldPosition.X % 18 || hitAWall)
                 {
                     if (Program.Direction == Direction.UP &&
                         !scene.walls[intPosition.X, intPosition.Y - 1])
@@ -136,7 +129,7 @@ public sealed class Pacman : Actor
             }
             case Direction.UP:
             {
-                if (-newPosition.Y % 18 > -oldPosition.Y % 18 || hitAWall)
+                if (-newPosition.Y % 18 < -oldPosition.Y % 18 || hitAWall)
                 {
                     if (Program.Direction == Direction.LEFT &&
                         !scene.walls[intPosition.X -1, intPosition.Y])
@@ -159,7 +152,6 @@ public sealed class Pacman : Actor
     
     public override void Render(RenderTarget target)
     {
-        target.Draw(debugBox);
         target.Draw(sprite);
     }
 
