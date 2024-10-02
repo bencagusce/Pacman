@@ -10,6 +10,7 @@ public sealed class Ghost : Actor
     private Vector2i spritePosition = new Vector2i(36, 0);
     private static Random rng = new Random();
     private List<CircleShape> debug;
+    private float preyTime = 0;
     public Ghost()
     {
         keyFrameThreshold = 0.25f;
@@ -26,10 +27,37 @@ public sealed class Ghost : Actor
             debug.Add(circ);
         }
     }
+
+    public override void Create(Scene scene)
+    {
+        scene.CandyEaten += OnCandyEaten;
+        base.Create(scene);
+    }
+
+    public override void Destroy(Scene scene)
+    {
+        scene.CandyEaten -= OnCandyEaten;
+        base.Destroy(scene);
+    }
+
+    private void OnCandyEaten(float time)
+    {
+        preyTime = time;
+        spritePosition = new Vector2i(spritePosition.X, 18);
+        sprite.TextureRect = new IntRect(spritePosition, new Vector2i(18, 18));
+    }
+
     public override void Update(Scene scene, float deltaTime)
     {
-        // spritePosition = isBlue ? new Vector2i(spritePosition.X, 18) : new Vector2i(spritePosition.X, 0);
-        // sprite.TextureRect = new IntRect(spritePosition, new Vector2i(18, 18));
+        if (preyTime > 0)
+        {
+            preyTime -= deltaTime;
+            if (preyTime < 0)
+            {
+                spritePosition = new Vector2i(spritePosition.X, 0);
+                sprite.TextureRect = new IntRect(spritePosition, new Vector2i(18, 18));
+            }
+        }
         SpriteChange(deltaTime);
         
         // MOVEMENT

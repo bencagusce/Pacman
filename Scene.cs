@@ -7,11 +7,12 @@ namespace Pacman;
 
 public delegate void ValueChangedEvent(Scene scene, int value);
 
+public delegate void TimeChangedEvent(float time);
 public sealed class Scene
 {
     public event ValueChangedEvent GainScore;
     public event ValueChangedEvent LoseHealth;
-    public event ValueChangedEvent EatCandy;
+    public event TimeChangedEvent CandyEaten;
     public readonly bool[,] walls;
     public readonly SceneLoader Loader = new SceneLoader();
     public readonly AssetManager Assets = new AssetManager();
@@ -20,7 +21,7 @@ public sealed class Scene
     private float grace = GRACELENGTH;
     private int scoreGained;
     private int healthLost;
-    private int CandyEaten;
+    private float candyTime;
 
     public Scene()
     {
@@ -71,6 +72,12 @@ public sealed class Scene
             LoseHealth?.Invoke(this, healthLost);
             healthLost = 0;
         }
+
+        if (candyTime != 0)
+        {
+            CandyEaten?.Invoke(candyTime);
+            candyTime = 0;
+        }
         
         for (int i = 0; i < entities.Count;)
         {
@@ -86,8 +93,8 @@ public sealed class Scene
     public void PublishLoseHealth(int amount)
         => healthLost += amount;
 
-    public void PublishEatCandy(int amount)
-        => CandyEaten += amount;
+    public void PublishCandyEaten(float time)
+        => candyTime = time;
     public void RenderAll(RenderTarget target)
     {
         foreach (var entity in entities)

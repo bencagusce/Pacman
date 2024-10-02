@@ -2,7 +2,6 @@ using SFML.Graphics;
 using SFML.System;
 
 namespace Pacman;
-
 public sealed class Candy : Entity
 {
     public Candy() : base("pacman")
@@ -21,12 +20,12 @@ public sealed class Candy : Entity
             return bounds;
         }
     }
-
+    
     protected override void CollideWith(Scene scene, Entity e)
     {
         if (e is Pacman)
         {
-            scene.PublishEatCandy(1);
+            scene.PublishCandyEaten(10);
             Dead = true;
         }
     }
