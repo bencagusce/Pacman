@@ -38,6 +38,7 @@ public sealed class Ghost : Actor
         Vector2f oldPosition = Position - sprite.Origin;
         // Move
         Position += walkSpeed * deltaTime * directionVectors[(int)direction];
+        // Loop if outside the map
         if (Position.X < 0) Position = new Vector2f(450,Position.Y);
         if (Position.X > 450) Position = new Vector2f(0,Position.Y);
         // Position after movement
