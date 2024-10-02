@@ -11,6 +11,7 @@ public sealed class Scene
 {
     public event ValueChangedEvent GainScore;
     public event ValueChangedEvent LoseHealth;
+    public event ValueChangedEvent EatCandy;
     public readonly bool[,] walls;
     public readonly SceneLoader Loader = new SceneLoader();
     public readonly AssetManager Assets = new AssetManager();
@@ -19,6 +20,7 @@ public sealed class Scene
     private float grace = GRACELENGTH;
     private int scoreGained;
     private int healthLost;
+    private int CandyEaten;
 
     public Scene()
     {
@@ -85,6 +87,9 @@ public sealed class Scene
 
     public void PublishLoseHealth(int amount)
         => healthLost += amount;
+
+    public void PublishEatCandy(int amount)
+        => CandyEaten += amount;
     public void RenderAll(RenderTarget target)
     {
         foreach (var entity in entities)

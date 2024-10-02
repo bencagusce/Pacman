@@ -21,4 +21,13 @@ public sealed class Candy : Entity
             return bounds;
         }
     }
+
+    protected override void CollideWith(Scene scene, Entity e)
+    {
+        if (e is Pacman)
+        {
+            scene.PublishEatCandy(1);
+            Dead = true;
+        }
+    }
 }
