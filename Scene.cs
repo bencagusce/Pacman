@@ -79,11 +79,7 @@ public sealed class Scene
     }
 
     public void PublishGainScore(int amount)
-    {
-        scoreGained += amount;
-        
-        Console.WriteLine("slgnseong");
-    }
+        => scoreGained += amount;
 
     public void PublishLoseHealth(int amount)
         => healthLost += amount;
