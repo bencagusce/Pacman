@@ -13,14 +13,19 @@ public sealed class GUI : Entity
     {
         sprite.TextureRect = new IntRect(72, 36, 18, 18);
         sprite.Origin = new Vector2f(9, 9);
+        sprite.Scale = new Vector2f(2, 2);
     }
 
     public override void Create(Scene scene)
     {
+        currentHealth = maxHealth;
         Font font = scene.Assets.LoadFont("pixel-font");
         scoreText.Font = font;
         scoreText.DisplayedString = "Score";
-        currentHealth = maxHealth;
+        scoreText.CharacterSize = 30;
+        scoreText.Scale = new Vector2f(0.75f, 0.75f);
+        
+        base.Create(scene);
     }
     public override void Render(RenderTarget target)
     {
@@ -31,7 +36,7 @@ public sealed class GUI : Entity
                 ? new IntRect(72, 36, 18, 18) //full heart
                 : new IntRect(72, 0, 18, 18);//Empty heart
             base.Render(target);
-            sprite.Position += new Vector2f(18, 0);
+            sprite.Position += new Vector2f(36, 0);
         }
 
         scoreText.DisplayedString = $"Score: {currentScore}";

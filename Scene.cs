@@ -5,14 +5,20 @@ using System;
 
 namespace Pacman;
 
-public class Scene
+public delegate void ValueChangedEvent(Scene scene, int value);
+
+public sealed class Scene
 {
-    private List<Entity> entities;
+    public event ValueChangedEvent GainScore;
+    public event ValueChangedEvent LoseHealth;
     public readonly bool[,] walls;
     public readonly SceneLoader Loader = new SceneLoader();
     public readonly AssetManager Assets = new AssetManager();
+    private List<Entity> entities;
     private const float GRACELENGTH = 3f;
     private float grace = GRACELENGTH;
+    private int scoreGained;
+    private int healthLost;
 
     public Scene()
     {
@@ -53,13 +59,30 @@ public class Scene
             entity.Update(this, deltaTime);
         }
 
+        if (scoreGained != 0)
+        {
+            GainScore?.Invoke(this, scoreGained);
+            scoreGained = 0;
+        }
+        if (healthLost != 0)
+        {
+            LoseHealth?.Invoke(this, healthLost);
+            healthLost = 0
+        }
+        
         for (int i = 0; i < entities.Count;)
         {
             Entity entity = entities[i];
             if (entity.Dead) entities.RemoveAt(i);
             else i++;
         }
-    } 
+    }
+
+    public void PublishGainScore(int amount)
+        => scoreGained += amount;
+
+    public void PublishLoseHealth(int amount)
+        => healthLost += amount;
     public void RenderAll(RenderTarget target)
     {
         foreach (var entity in entities)
