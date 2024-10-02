@@ -90,6 +90,7 @@ public sealed class Ghost : Actor
         if (e is Pacman)
         {
             scene.PublishLoseHealth(1);
+            Console.WriteLine("hit");
             Reset();
         }
     }

@@ -60,7 +60,6 @@ public sealed class Pacman : Actor
     public override void Update(Scene scene, float deltaTime)
     {
         SpriteChange(deltaTime);
-        
         // MOVEMENT
         // Position before movement
         Vector2f oldPosition = Position - sprite.Origin;
@@ -99,6 +98,8 @@ public sealed class Pacman : Actor
                 }
             }
         }
+        
+        base.Update(scene, deltaTime);
     }
     
     //0,1,2,-1

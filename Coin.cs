@@ -21,9 +21,12 @@ public sealed class Coin : Entity
             return bounds;
         }
     }
-
-    //public bool touching(Pacman pacman)
-    //{
-    //    
-    //}
+    protected override void CollideWith(Scene scene, Entity e)
+    {
+        if (e is Pacman)
+        {
+            scene.PublishGainScore(100);
+            Console.WriteLine("slgnseong");
+        }
+    }
 }

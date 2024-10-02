@@ -34,7 +34,7 @@ public class Entity
     protected virtual void CollideWith(Scene s, Entity other)
     {
         // Empty ->Overriden by implementing classes
-        
+        //Console.WriteLine("oignsegon");
     }
     public virtual void Render(RenderTarget target)
     {
