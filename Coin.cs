@@ -26,7 +26,7 @@ public sealed class Coin : Entity
         if (e is Pacman)
         {
             scene.PublishGainScore(100);
-            Console.WriteLine("slgnseong");
+            Dead = true;
         }
     }
 }

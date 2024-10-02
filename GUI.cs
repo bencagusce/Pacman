@@ -26,6 +26,7 @@ public sealed class GUI : Entity
         scoreText.Scale = new Vector2f(0.75f, 0.75f);
 
         scene.LoseHealth += OnLoseHealth;
+        scene.GainScore += OnGainScore;
         
         base.Create(scene);
     }
@@ -35,8 +36,11 @@ public sealed class GUI : Entity
         currentHealth -= amount;
         if (currentHealth <= 0) scene.Loader.Reload();
     }
-    
-    private void OnGainScore(Scene scene, )
+
+    private void OnGainScore(Scene scene, int amount)
+    {
+        currentScore += amount;
+    }
     
     public override void Render(RenderTarget target)
     {
