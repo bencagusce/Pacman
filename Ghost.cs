@@ -9,7 +9,6 @@ public sealed class Ghost : Actor
     private bool firstSprite = true;
     private Vector2i spritePosition = new Vector2i(36, 0);
     private static Random rng = new Random();
-    private List<CircleShape> debug;
     private float preyTime = 0;
     private const float PREYSPEED = 60f;
     public Ghost()
@@ -18,15 +17,6 @@ public sealed class Ghost : Actor
         sprite.TextureRect = new IntRect(36, 0, 18, 18);
         sprite.Origin = new Vector2f(9, 9);
         direction = Direction.UP;
-
-        debug = new List<CircleShape>();
-        for (int i = 0; i < 4; i++)
-        {
-            CircleShape circ = new CircleShape();
-            circ.Radius = 4;
-            circ.Origin = new Vector2f(4, 4);
-            debug.Add(circ);
-        }
     }
 
     public override void Create(Scene scene)
@@ -101,18 +91,12 @@ public sealed class Ghost : Actor
             List<Direction> possibleMovements = new List<Direction>();
             for (int i = 0; i < 4; i++)
             {
-                debug[i].Position = sprite.Origin + (Vector2f)(18 * (intPosition + (Vector2i)directionVectors[i]));
                 
                 if (!scene.walls[intPosition.X + 1 + (int)directionVectors[i].X,
                         intPosition.Y + 1 + (int)directionVectors[i].Y] &&
                         i != (int)direction + 1 - 2 * ((int)direction % 2))
                 {
                     possibleMovements.Add((Direction)i);
-                    debug[i].FillColor = Color.Green;
-                }
-                else
-                {
-                    debug[i].FillColor = Color.Red;
                 }
             }
 
@@ -153,13 +137,4 @@ public sealed class Ghost : Actor
             firstSprite = !firstSprite;
         }
     }
-
-    // public override void Render(RenderTarget target)
-    // {
-    //     base.Render(target);
-    //     foreach (var VARIABLE in debug)
-    //     {
-    //         target.Draw(VARIABLE);
-    //     }
-    // }
 }

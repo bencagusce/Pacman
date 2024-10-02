@@ -48,7 +48,6 @@ public class Actor : Entity
     {
         originalPosition = Position;
         originalSpeed = walkSpeed;
-        Console.WriteLine($"originalSpeed{originalSpeed}, original Position{originalPosition}");
     }
     protected virtual void Reset()
     { 
