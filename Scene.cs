@@ -24,6 +24,8 @@ public sealed class Scene
     {
         entities = new List<Entity>();
         walls = new bool[27,23];
+        
+        LoseHealth += (s, e) => { grace = GRACELENGTH;};
     }
     public void Spawn(Entity entity)
     {

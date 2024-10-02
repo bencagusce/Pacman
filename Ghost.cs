@@ -26,7 +26,6 @@ public sealed class Ghost : Actor
             debug.Add(circ);
         }
     }
-
     public override void Update(Scene scene, float deltaTime)
     {
         // spritePosition = isBlue ? new Vector2i(spritePosition.X, 18) : new Vector2i(spritePosition.X, 0);
@@ -85,6 +84,7 @@ public sealed class Ghost : Actor
             // If ghost has turned move ghost to the center of the current tile
             if (oldDirection != direction) Position = sprite.Origin + (Vector2f)(18 * intPosition);
         }
+        base.Update(scene, deltaTime);
     }
     protected override void CollideWith(Scene scene, Entity e)
     {
@@ -93,6 +93,7 @@ public sealed class Ghost : Actor
             scene.PublishLoseHealth(1);
             Console.WriteLine("hit");
             Reset();
+            
         }
     }
     private void SpriteChange(float deltaTime)
