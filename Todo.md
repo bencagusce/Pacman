@@ -32,4 +32,6 @@
 - [ ] Add a highscore that is shown when the game is lost (health = 0) and is saved between sessions (written to a file).
 
 ## fix for next time
-- [x] hearts to show on screen
+- [ ] ghost reset
+- [ ] only resets position on ghost collided with
+- [ ] Current health doesnt reset correctly.

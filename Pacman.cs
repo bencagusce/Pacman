@@ -51,13 +51,12 @@ public sealed class Pacman : Actor
     }
 
     private void OnLoseHealth(Scene scene, int amount) => Reset();
-
     protected override void Reset()
     {
-        base.Reset();
         direction = Direction.RIGHT;
         animationFrame = 1;
         sprite.TextureRect = new IntRect(0, 0, 18, 18);
+        base.Reset();
     }
     public override void Update(Scene scene, float deltaTime)
     {
