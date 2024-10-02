@@ -31,7 +31,7 @@ public class Actor : Entity
 
     public Actor() : base("pacman"){}
 
-    protected void Reset()
+    protected virtual void Reset()
     { 
         Position = originalPosition;
         walkSpeed = originalSpeed;
