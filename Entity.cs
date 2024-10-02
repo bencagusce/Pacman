@@ -7,7 +7,6 @@ public class Entity
     private string textureName;
     protected Sprite sprite = new Sprite();
     public bool Dead;
-    public bool dontDestroyOnLoad;
     protected Entity(string textureName)
     {
         this.textureName = textureName;

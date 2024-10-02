@@ -6,9 +6,11 @@ namespace Pacman;
 public sealed class GUI : Entity
 {
     Text scoreText = new Text();
-    private int maxHealth = 3;
-    private int currentHealth;
+    private const int MAXHEALTH = 3;
+    public static int currentHealth;
     public static int currentScore = 0;
+    public static bool resetStats = true;
+
     public GUI() : base("pacman")
     {
         sprite.TextureRect = new IntRect(72, 36, 18, 18);
@@ -18,15 +20,18 @@ public sealed class GUI : Entity
 
     public override void Create(Scene scene)
     {
-        currentHealth = maxHealth;
-        currentScore = 0;
-        Console.WriteLine("Reset");
         Font font = scene.Assets.LoadFont("pixel-font");
         scoreText.Font = font;
         scoreText.DisplayedString = "Score";
         scoreText.CharacterSize = 30;
         scoreText.Scale = new Vector2f(0.75f, 0.75f);
-
+        
+        if (resetStats)
+        {
+            currentHealth = MAXHEALTH;
+            currentScore = 0;
+        }
+        
         scene.LoseHealth += OnLoseHealth;
         scene.GainScore += OnGainScore;
         
@@ -43,18 +48,27 @@ public sealed class GUI : Entity
     private void OnLoseHealth(Scene scene, int amount)
     {
         currentHealth -= amount;
-        if (currentHealth <= 0) scene.Loader.Reload();
+        if (currentHealth <= 0)
+        {
+            resetStats = true;
+            scene.Loader.Reload();
+        }
     }
 
     private void OnGainScore(Scene scene, int amount)
     {
         currentScore += amount;
+        if (!scene.FindByType<Coin>(out _))
+        {
+            resetStats = false;
+            scene.Loader.Reload();
+        }
     }
     
     public override void Render(RenderTarget target)
     {
         sprite.Position = new Vector2f(36, 396);
-        for (int i = 0; i < maxHealth; i++)
+        for (int i = 0; i < MAXHEALTH; i++)
         {
             sprite.TextureRect = i < currentHealth
                 ? new IntRect(72, 36, 18, 18) //full heart
