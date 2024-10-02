@@ -12,6 +12,7 @@ public enum Direction
 public class Actor : Entity
 {
     protected int animationFrame;
+    protected const float DEFAULTWALKSPEED = 100f;
     protected float walkSpeed = 100f;
     protected float animationBuffer = 0;
     protected float keyFrameThreshold;

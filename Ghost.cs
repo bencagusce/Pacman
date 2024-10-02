@@ -11,6 +11,7 @@ public sealed class Ghost : Actor
     private static Random rng = new Random();
     private List<CircleShape> debug;
     private float preyTime = 0;
+    private const float PREYSPEED = 60f;
     public Ghost()
     {
         keyFrameThreshold = 0.25f;
@@ -43,7 +44,17 @@ public sealed class Ghost : Actor
     private void OnCandyEaten(float time)
     {
         preyTime = time;
+        walkSpeed = PREYSPEED;
         spritePosition = new Vector2i(spritePosition.X, 18);
+        sprite.TextureRect = new IntRect(spritePosition, new Vector2i(18, 18));
+    }
+
+    protected override void Reset()
+    {
+        base.Reset();
+        preyTime = 0;
+        walkSpeed = DEFAULTWALKSPEED;
+        spritePosition = new Vector2i(spritePosition.X, 0);
         sprite.TextureRect = new IntRect(spritePosition, new Vector2i(18, 18));
     }
 
@@ -54,6 +65,7 @@ public sealed class Ghost : Actor
             preyTime -= deltaTime;
             if (preyTime < 0)
             {
+                walkSpeed = DEFAULTWALKSPEED;
                 spritePosition = new Vector2i(spritePosition.X, 0);
                 sprite.TextureRect = new IntRect(spritePosition, new Vector2i(18, 18));
             }
@@ -118,10 +130,16 @@ public sealed class Ghost : Actor
     {
         if (e is Pacman)
         {
-            scene.PublishLoseHealth(1);
-            Console.WriteLine("hit");
-            Reset();
-            
+            if (preyTime > 0)
+            {
+                scene.PublishGainScore(200);
+                Reset();
+            }
+            else
+            {
+                scene.PublishLoseHealth(1);
+                Reset();
+            }
         }
     }
     private void SpriteChange(float deltaTime)

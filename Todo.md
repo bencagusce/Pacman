@@ -5,13 +5,13 @@
     - [x] Left, Right, Up and Down.
     - [x] Can’t move through walls.
     - [x] Loops around when going outside the edge of the screen.
-- [ ] Ghosts.
+- [x] Ghosts.
     - [x] Moves through the maze at random.
     - [x] Can’t move through walls.
-    - [ ] Can be turned between enemy and prey state.
-    - [ ] Has a different graphical representation for each state.
-    - [ ] Is ”killed” when colliding with pacman as prey, but not enemy.
-    - [ ] Is reset to start position when killed.
+    - [x] Can be turned between enemy and prey state.
+    - [x] Has a different graphical representation for each state.
+    - [x] Is ”killed” when colliding with pacman as prey, but not enemy.
+    - [x] Is reset to start position when killed.
 - [ ] Coins & Score.
     - [x] Player gains points when pacman collides with coins.
     - [ ] When the last coin is eaten the level should reset, but the score and health should remain.
