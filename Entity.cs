@@ -25,7 +25,7 @@ public class Entity
     }
     public virtual void Destroy(Scene scene)
     {
-        
+        Dead = true;
     }
     public virtual void Update(Scene scene, float deltaTime)
     {

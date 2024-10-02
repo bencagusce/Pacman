@@ -85,7 +85,7 @@ public sealed class Ghost : Actor
         }
     }
 
-    private override void CollideWith(Scene scene, Entity e)
+    protected override void CollideWith(Scene scene, Entity e)
     {
         if (e is Pacman)
         {
