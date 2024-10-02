@@ -32,7 +32,7 @@ public class SceneLoader
             string line = lines[y];
             for (int x = 0; x < line.Length; x++)
             {
-                if (line[x] == '#') scene.SpawnWall(x,y);
+                if (line[x] == '#') scene.SpawnWall(x+1,y+1);
                 
                 Entity entity;
                 if (Create(line[x], out entity))

@@ -23,7 +23,7 @@ public sealed class Scene
     public Scene()
     {
         entities = new List<Entity>();
-        walls = new bool[25,21];
+        walls = new bool[27,23];
     }
     public void Spawn(Entity entity)
     {

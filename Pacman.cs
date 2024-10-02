@@ -65,6 +65,9 @@ public sealed class Pacman : Actor
         Vector2f oldPosition = Position - sprite.Origin;
         // Move
         Position += walkSpeed * deltaTime * directionVectors[(int)direction];
+        // Loop if outside the map
+        if (Position.X < 0) Position = new Vector2f(450,Position.Y);
+        if (Position.X > 450) Position = new Vector2f(0,Position.Y);
         // Position after movement
         Vector2f newPosition = Position - sprite.Origin;
         // Pacman's position on the wall grid
@@ -74,7 +77,7 @@ public sealed class Pacman : Actor
 
         // Check if pacman has hit a wall
         bool hitAWall = false;
-        if (scene.walls[frontPosition.X, frontPosition.Y])
+        if (scene.walls[frontPosition.X + 1, frontPosition.Y + 1])
         {
             Position = sprite.Origin + (Vector2f)(18 * intPosition);
             hitAWall = true;
@@ -87,8 +90,8 @@ public sealed class Pacman : Actor
             if (Program.Direction != direction && Program.Direction != direction + 1 - 2 * ((int)direction % 2))
             {
                 // Check that there is no wall in the desired travel direction
-                if (!scene.walls[intPosition.X + (int)directionVectors[(int)Program.Direction].X,
-                        intPosition.Y + (int)directionVectors[(int)Program.Direction].Y])
+                if (!scene.walls[intPosition.X + 1 + (int)directionVectors[(int)Program.Direction].X,
+                        intPosition.Y + 1 + (int)directionVectors[(int)Program.Direction].Y])
                 {
                     // Change direction to reflect input
                     direction = Program.Direction;
