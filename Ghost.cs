@@ -38,7 +38,8 @@ public sealed class Ghost : Actor
         Vector2f oldPosition = Position - sprite.Origin;
         // Move
         Position += walkSpeed * deltaTime * directionVectors[(int)direction];
-        //if (Position.X < 0) Position = 
+        if (Position.X < 0) Position = new Vector2f(450,Position.Y);
+        if (Position.X > 450) Position = new Vector2f(0,Position.Y);
         // Position after movement
         Vector2f newPosition = Position - sprite.Origin;
         // Ghost's position on the wall grid
@@ -48,7 +49,7 @@ public sealed class Ghost : Actor
 
         // Check if ghost has hit a wall
         bool hitAWall = false;
-        if (scene.walls[frontPosition.X, frontPosition.Y])
+        if (scene.walls[frontPosition.X + 1, frontPosition.Y + 1])
         {
             Position = sprite.Origin + (Vector2f)(18 * intPosition);
             hitAWall = true;
@@ -62,8 +63,8 @@ public sealed class Ghost : Actor
             {
                 debug[i].Position = sprite.Origin + (Vector2f)(18 * (intPosition + (Vector2i)directionVectors[i]));
                 
-                if (!scene.walls[intPosition.X + (int)directionVectors[i].X,
-                        intPosition.Y + (int)directionVectors[i].Y] &&
+                if (!scene.walls[intPosition.X + 1 + (int)directionVectors[i].X,
+                        intPosition.Y + 1 + (int)directionVectors[i].Y] &&
                         i != (int)direction + 1 - 2 * ((int)direction % 2))
                 {
                     possibleMovements.Add((Direction)i);
@@ -82,15 +83,6 @@ public sealed class Ghost : Actor
                     
             // If ghost has turned move ghost to the center of the current tile
             if (oldDirection != direction) Position = sprite.Origin + (Vector2f)(18 * intPosition);
-        }
-    }
-
-    private override void CollideWith(Scene scene, Entity e)
-    {
-        if (e is Pacman)
-        {
-            scene.PublishLoseHealth(1);
-            Reset();
         }
     }
 
