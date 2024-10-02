@@ -23,6 +23,7 @@ public class SceneLoader
     {
         if (nextScene == "") return;
         scene.Clear();
+        scene.StartGrace();
         
         scene.LoseHealth += (s, e) => scene.StartGrace();
         

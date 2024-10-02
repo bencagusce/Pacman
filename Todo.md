@@ -12,12 +12,12 @@
     - [x] Has a different graphical representation for each state.
     - [x] Is ”killed” when colliding with pacman as prey, but not enemy.
     - [x] Is reset to start position when killed.
-- [ ] Coins & Score.
+- [x] Coins & Score.
     - [x] Player gains points when pacman collides with coins.
-    - [ ] When the last coin is eaten the level should reset, but the score and health should remain.
-- [ ] Candy.
-    - [ ] Pacman can ”eat” candy.
-    - [ ] Eating candy turns the ghosts from enemies to prey, for a set amount of time, then they turn back to enemies.
+    - [x] When the last coin is eaten the level should reset, but the score and health should remain.
+- [x] Candy.
+    - [x] Pacman can ”eat” candy.
+    - [x] Eating candy turns the ghosts from enemies to prey, for a set amount of time, then they turn back to enemies.
 - [x] Health.
     - [x] Player lose health when colliding with enemy ghosts.
     - [x] Losing health should reset player to starting position.

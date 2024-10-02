@@ -18,7 +18,7 @@ public sealed class Scene
     public readonly AssetManager Assets = new AssetManager();
     private List<Entity> entities;
     private const float GRACELENGTH = 3f;
-    private float grace = GRACELENGTH;
+    private float grace;
     private int scoreGained;
     private int healthLost;
     private float candyTime;
