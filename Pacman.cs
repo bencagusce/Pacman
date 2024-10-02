@@ -50,19 +50,13 @@ public sealed class Pacman : Actor
         scene.LoseHealth += OnLoseHealth;
     }
 
-    private void OnLoseHealth(Scene scene, int amount)
+    private void OnLoseHealth(Scene scene, int amount) => Reset();
+    public override void Destroy(Scene scene)
     {
-        Reset();
+        base.Destroy(scene);
+        scene.LoseHealth -= OnLoseHealth;
     }
-
-    // step 45 after fixing reset function.
-    // step 45 after fixing reset function.
-    // step 45 after fixing reset function.
-    // step 45 after fixing reset function.
-    // step 45 after fixing reset function.
-    // step 45 after fixing reset function.
-    // step 45 after fixing reset function.
-    // step 45 after fixing reset function.
+    
     public override void Update(Scene scene, float deltaTime)
     {
         SpriteChange(deltaTime);

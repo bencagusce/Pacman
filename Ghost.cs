@@ -85,7 +85,14 @@ public sealed class Ghost : Actor
             if (oldDirection != direction) Position = sprite.Origin + (Vector2f)(18 * intPosition);
         }
     }
-
+    protected override void CollideWith(Scene scene, Entity e)
+    {
+        if (e is Pacman)
+        {
+            scene.PublishLoseHealth(1);
+            Reset();
+        }
+    }
     private void SpriteChange(float deltaTime)
     {
         animationBuffer += deltaTime;

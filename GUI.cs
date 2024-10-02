@@ -27,6 +27,12 @@ public sealed class GUI : Entity
         
         base.Create(scene);
     }
+
+    private void OnLoseHealth(Scene scene, int amount)
+    {
+        currentHealth -= amount;
+        if (currentHealth <= 0) scene.Loader.Reload();
+    }
     public override void Render(RenderTarget target)
     {
         sprite.Position = new Vector2f(36, 396);

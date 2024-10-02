@@ -19,6 +19,7 @@ public class Actor : Entity
     protected const float RADIUS = 9;
     protected Direction direction;
     protected float originalSpeed;
+    protected Vector2f originalPosition;
 
     protected readonly static Vector2f[] directionVectors =
     {
@@ -27,20 +28,27 @@ public class Actor : Entity
         new (1, 0),
         new (-1, 0)
     };
-    public Actor(): base ("pacman")
-    {
-        
-    }
+
+    public Actor() : base("pacman"){}
 
     protected void Reset()
+    { 
+        Position = originalPosition;
+        walkSpeed = originalSpeed;
+
+    }
+
+    protected void ResetPoint()
     {
-        Vector2f originalPosition = Position;
+        originalPosition = Position;
         originalSpeed = walkSpeed;
+        Console.WriteLine($"originalSpeed{originalSpeed}, original Position{originalPosition}");
     }
 
     public override void Create(Scene scene)
     {
         base.Create(scene);
+        ResetPoint();
         Reset();
         
     }
