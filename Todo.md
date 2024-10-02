@@ -18,10 +18,10 @@
 - [ ] Candy.
     - [ ] Pacman can ”eat” candy.
     - [ ] Eating candy turns the ghosts from enemies to prey, for a set amount of time, then they turn back to enemies.
-- [ ] Health.
+- [x] Health.
     - [x] Player lose health when colliding with enemy ghosts.
     - [x] Losing health should reset player to starting position.
-    - [ ] When health is 0, the game restarts completely.
+    - [x] When health is 0, the game restarts completely.
 - [x] Level.
     - [x] Walls that neither the player or the ghosts can move through.
     - [x] Is loaded from a text-file.
@@ -32,6 +32,6 @@
 - [ ] Add a highscore that is shown when the game is lost (health = 0) and is saved between sessions (written to a file).
 
 ## fix for next time
-- [ ] ghost reset
-- [ ] only resets position on ghost collided with
-- [ ] Current health doesnt reset correctly.
+- [x] ghost reset
+- [x] Current health doesnt reset correctly.
+- [ ] Remove debug

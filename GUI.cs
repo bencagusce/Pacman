@@ -19,6 +19,8 @@ public sealed class GUI : Entity
     public override void Create(Scene scene)
     {
         currentHealth = maxHealth;
+        currentScore = 0;
+        Console.WriteLine("Reset");
         Font font = scene.Assets.LoadFont("pixel-font");
         scoreText.Font = font;
         scoreText.DisplayedString = "Score";
@@ -31,14 +33,17 @@ public sealed class GUI : Entity
         base.Create(scene);
     }
 
+    public override void Destroy(Scene scene)
+    {
+        base.Destroy(scene);
+        scene.LoseHealth -= OnLoseHealth;
+        scene.GainScore -= OnGainScore;
+    }
+
     private void OnLoseHealth(Scene scene, int amount)
     {
         currentHealth -= amount;
-        if (currentHealth <= 0)
-        {
-            currentHealth = 3;
-            scene.Loader.Reload();
-        }
+        if (currentHealth <= 0) scene.Loader.Reload();
     }
 
     private void OnGainScore(Scene scene, int amount)

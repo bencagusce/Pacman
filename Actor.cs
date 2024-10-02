@@ -15,7 +15,6 @@ public class Actor : Entity
     protected float walkSpeed = 100f;
     protected float animationBuffer = 0;
     protected float keyFrameThreshold;
-    protected bool keyframe = false;
     protected const float RADIUS = 9;
     protected Direction direction;
     protected float originalSpeed;
@@ -31,28 +30,31 @@ public class Actor : Entity
 
     public Actor() : base("pacman"){}
 
-    protected virtual void Reset()
-    { 
-        Position = originalPosition;
-        walkSpeed = originalSpeed;
-
+    public override void Create(Scene scene)
+    {
+        base.Create(scene);
+        ResetPoint();
+        Reset();
+        scene.LoseHealth += OnLoseHealth;
     }
 
+    public override void Destroy(Scene scene)
+    {
+        base.Destroy(scene);
+        scene.LoseHealth -= OnLoseHealth;
+    }
     protected void ResetPoint()
     {
         originalPosition = Position;
         originalSpeed = walkSpeed;
         Console.WriteLine($"originalSpeed{originalSpeed}, original Position{originalPosition}");
     }
-
-    public override void Create(Scene scene)
-    {
-        base.Create(scene);
-        ResetPoint();
-        Reset();
-        
+    protected virtual void Reset()
+    { 
+        Position = originalPosition;
+        walkSpeed = originalSpeed;
     }
-
+    private void OnLoseHealth(Scene scene, int amount) => Reset();
     /// <summary>
     /// Divides a vector's axis by 18 and rounds them to integers 
     /// </summary>

@@ -23,7 +23,9 @@ public class SceneLoader
     {
         if (nextScene == "") return;
         scene.Clear();
-
+        
+        scene.LoseHealth += (s, e) => scene.StartGrace();
+        
         string file = $"assets/{nextScene}.txt";
         List<string> lines = File.ReadLines(file, Encoding.UTF8).ToList();
         
@@ -60,9 +62,5 @@ public class SceneLoader
 
     public void Load(string scene) => nextScene = scene;
 
-    public void Reload()
-    {
-        GUI.currentScore = 0;
-        nextScene = currentScene;
-    }
+    public void Reload() => nextScene = currentScene;
 }

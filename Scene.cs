@@ -24,8 +24,6 @@ public sealed class Scene
     {
         entities = new List<Entity>();
         walls = new bool[27,23];
-        
-        LoseHealth += (s, e) => { grace = GRACELENGTH;};
     }
     public void Spawn(Entity entity)
     {
@@ -83,8 +81,6 @@ public sealed class Scene
     public void PublishGainScore(int amount)
     {
         scoreGained += amount;
-        
-        Console.WriteLine("slgnseong");
     }
 
     public void PublishLoseHealth(int amount)
@@ -96,6 +92,8 @@ public sealed class Scene
             entity.Render(target);
         }
     }
+
+    public void StartGrace() => grace = GRACELENGTH;
     public bool FindByType<T>(out T found) where T : Entity
     {
         foreach (var entity in entities)
@@ -116,7 +114,7 @@ public sealed class Scene
         for (int i = lastEntity; i >= 0; i--)
         {
             Entity entity = entities[i];
-            if (entity.Dead) continue; //also a problem with coor of entity.Dead 11
+            if (entity.Dead) continue;
             if (entity.Bounds.Intersects(bounds)) yield return entity;
         }
     }

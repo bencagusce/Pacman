@@ -10,7 +10,7 @@ public sealed class Ghost : Actor
     private Vector2i spritePosition = new Vector2i(36, 0);
     private static Random rng = new Random();
     private List<CircleShape> debug;
-    public Ghost() : base()
+    public Ghost()
     {
         keyFrameThreshold = 0.25f;
         sprite.TextureRect = new IntRect(36, 0, 18, 18);
