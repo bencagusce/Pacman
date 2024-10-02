@@ -8,7 +8,7 @@ public sealed class GUI : Entity
     Text scoreText = new Text();
     private int maxHealth = 3;
     private int currentHealth;
-    private int currentScore = 0;
+    private static int currentScore = 0;
     public GUI() : base("pacman")
     {
         sprite.TextureRect = new IntRect(72, 36, 18, 18);

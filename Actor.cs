@@ -18,6 +18,7 @@ public class Actor : Entity
     protected bool keyframe = false;
     protected const float RADIUS = 9;
     protected Direction direction;
+    protected float originalSpeed;
 
     protected readonly static Vector2f[] directionVectors =
     {
@@ -28,6 +29,19 @@ public class Actor : Entity
     };
     public Actor(): base ("pacman")
     {
+        
+    }
+
+    protected void Reset()
+    {
+        Vector2f originalPosition = Position;
+        originalSpeed = walkSpeed;
+    }
+
+    public override void Create(Scene scene)
+    {
+        base.Create(scene);
+        Reset();
         
     }
 

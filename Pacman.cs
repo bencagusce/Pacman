@@ -44,6 +44,25 @@ public sealed class Pacman : Actor
         direction = Direction.RIGHT;
     }
 
+    public override void Create(Scene scene)
+    {
+        base.Create(scene);
+        scene.LoseHealth += OnLoseHealth;
+    }
+
+    private void OnLoseHealth(Scene scene, int amount)
+    {
+        Reset();
+    }
+
+    // step 45 after fixing reset function.
+    // step 45 after fixing reset function.
+    // step 45 after fixing reset function.
+    // step 45 after fixing reset function.
+    // step 45 after fixing reset function.
+    // step 45 after fixing reset function.
+    // step 45 after fixing reset function.
+    // step 45 after fixing reset function.
     public override void Update(Scene scene, float deltaTime)
     {
         SpriteChange(deltaTime);
@@ -89,7 +108,7 @@ public sealed class Pacman : Actor
     }
     
     //0,1,2,-1
-    public void SpriteChange(float deltaTime)
+    private void SpriteChange(float deltaTime)
     {
         //change sprite based on an animationbuffer
         animationBuffer += deltaTime;
