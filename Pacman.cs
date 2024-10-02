@@ -87,27 +87,6 @@ public sealed class Pacman : Actor
             }
         }
     }
-
-    /// <summary>
-    /// Divides a vector's axis by 18 and rounds them to integers 
-    /// </summary>
-    /// <param name="v"></param>
-    /// <returns></returns>
-    private static Vector2i RoundToGrid(Vector2f v)
-    {
-        return new Vector2i((int)MathF.Round(v.X / 18), (int)MathF.Round(v.Y / 18));                                       
-    }
-
-    private bool PassedTileCenter(Vector2f newPos, Vector2f oldPos)
-    {
-        float n = newPos.X * directionVectors[(int)direction].X +
-                  newPos.Y * directionVectors[(int)direction].Y;
-        
-        float o = oldPos.X * directionVectors[(int)direction].X +
-                  oldPos.Y * directionVectors[(int)direction].Y;
-
-        return n % 18 < o % 18;
-    }
     
     //0,1,2,-1
     public void SpriteChange(float deltaTime)
