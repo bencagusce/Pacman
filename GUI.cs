@@ -8,7 +8,7 @@ public sealed class GUI : Entity
     Text scoreText = new Text();
     private int maxHealth = 3;
     private int currentHealth;
-    private static int currentScore = 0;
+    public static int currentScore = 0;
     public GUI() : base("pacman")
     {
         sprite.TextureRect = new IntRect(72, 36, 18, 18);
@@ -34,7 +34,11 @@ public sealed class GUI : Entity
     private void OnLoseHealth(Scene scene, int amount)
     {
         currentHealth -= amount;
-        if (currentHealth <= 0) scene.Loader.Reload();
+        if (currentHealth <= 0)
+        {
+            currentHealth = 3;
+            scene.Loader.Reload();
+        }
     }
 
     private void OnGainScore(Scene scene, int amount)

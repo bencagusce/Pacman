@@ -60,5 +60,9 @@ public class SceneLoader
 
     public void Load(string scene) => nextScene = scene;
 
-    public void Reload() => nextScene = currentScene;
+    public void Reload()
+    {
+        GUI.currentScore = 0;
+        nextScene = currentScene;
+    }
 }
